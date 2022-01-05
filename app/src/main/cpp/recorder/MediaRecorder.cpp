@@ -19,7 +19,6 @@ MediaRecorder::~MediaRecorder() {
 }
 
 int MediaRecorder::StartRecord() {
-    LOGCATE("MediaRecorder::StartRecord");
     int result = 0;
     do {
 //        ff_const59 AVOutputFormat *format = av_guess_format(NULL, m_OutUrl, NULL);
@@ -35,8 +34,11 @@ int MediaRecorder::StartRecord() {
             break;
         }
 
+        if (m_FormatCtx->oformat->video_codec == AV_CODEC_ID_VP9) {
+            m_FormatCtx->oformat->audio_codec = AV_CODEC_ID_OPUS;
+        }
         m_OutputFormat = m_FormatCtx->oformat;
-
+        LOGCATI("MediaRecorder::StartRecord m_OutputFormat->video_codec=%d, m_OutputFormat->audio_codec=%d", m_OutputFormat->video_codec, m_OutputFormat->audio_codec);
         /* Add the audio and video streams using the default format codecs
          * and initialize the codecs. */
         if (m_OutputFormat->video_codec != AV_CODEC_ID_NONE) {
@@ -345,7 +347,7 @@ int MediaRecorder::OpenAudio(AVFormatContext *oc, AVCodec *codec, AVOutputStream
     /* open it */
     ret = avcodec_open2(c, codec, nullptr);
     if (ret < 0) {
-        LOGCATE("MediaRecorder::OpenAudio Could not open audio codec: %s", av_err2str(ret));
+        LOGCATE("MediaRecorder::OpenAudio Could not open audio codec(%s): %s", codec->name, av_err2str(ret));
         return -1;
     }
 
