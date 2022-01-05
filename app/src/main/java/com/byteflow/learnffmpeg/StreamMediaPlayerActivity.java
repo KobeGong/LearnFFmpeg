@@ -47,11 +47,12 @@ public class StreamMediaPlayerActivity extends AppCompatActivity implements Surf
     private FFMediaPlayer mMediaPlayer = null;
     private SeekBar mSeekBar = null;
     private boolean mIsTouch = false;
-    private final String mVideoPath = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4";
+    private String mVideoPath = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_media_player);
+        mVideoPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/aaa.webm";
         mSurfaceView = findViewById(R.id.surface_view);
         mSurfaceView.getHolder().addCallback(this);
 

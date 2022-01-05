@@ -276,7 +276,7 @@ public class AVRecorderActivity extends AppCompatActivity implements Camera2Fram
                 int frameHeight = mCamera2Wrapper.getPreviewSize().getHeight();
                 int fps = 25;
                 int bitRate = (int) (frameWidth * frameHeight * fps * 0.3);
-                mOutUrl = getOutFile(".mp4").getAbsolutePath();
+                mOutUrl = getOutFile(".webm").getAbsolutePath();
                 mMediaRecorder.startRecord(RECORDER_TYPE_AV, mOutUrl, frameWidth, frameHeight, bitRate, fps);
                 mAudioRecorder = new AudioRecorder(AVRecorderActivity.this);
                 mAudioRecorder.start();

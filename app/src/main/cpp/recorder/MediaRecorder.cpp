@@ -22,6 +22,8 @@ int MediaRecorder::StartRecord() {
     LOGCATE("MediaRecorder::StartRecord");
     int result = 0;
     do {
+//        ff_const59 AVOutputFormat *format = av_guess_format(NULL, m_OutUrl, NULL);
+//        LOGCATG("MediaRecorder::StartRecord format = %s.\n", format->name);
         /* allocate the output media context */
         avformat_alloc_output_context2(&m_FormatCtx, NULL, NULL, m_OutUrl);
         if (!m_FormatCtx) {

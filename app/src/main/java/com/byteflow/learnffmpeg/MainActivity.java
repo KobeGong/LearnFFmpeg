@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         ((TextView)findViewById(R.id.text_view)).setText("FFmpeg 版本和编译配置信息\n\n" + FFMediaPlayer.GetFFmpegVersion());
 
     }

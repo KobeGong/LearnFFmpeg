@@ -250,7 +250,7 @@ public class VideoRecorderActivity extends AppCompatActivity implements Camera2F
                 int frameHeight = mCamera2Wrapper.getPreviewSize().getHeight();
                 int fps = 25;
                 int bitRate = (int) (frameWidth * frameHeight * fps * 0.25);
-                mOutUrl = getOutFile(".mp4").getAbsolutePath();
+                mOutUrl = getOutFile(".webm").getAbsolutePath();
                 mMediaRecorder.startRecord(RECORDER_TYPE_SINGLE_VIDEO, mOutUrl, frameWidth, frameHeight, bitRate, fps);
 
             }

@@ -101,6 +101,7 @@ set(third-party-libs
         avutil
         fdk-aac
         x264
+        vpx
         )
 
 set(native-libs

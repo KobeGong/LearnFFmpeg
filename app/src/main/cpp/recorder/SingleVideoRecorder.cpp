@@ -11,7 +11,8 @@
 
 SingleVideoRecorder::SingleVideoRecorder(const char *outUrl, int frameWidth, int frameHeight,
                                          long bitRate, int fps) {
-    LOGCATE("SingleVideoRecorder::SingleVideoRecorder outUrl=%s, [w,h]=[%d,%d], bitRate=%ld, fps=%d", outUrl, frameWidth, frameHeight, bitRate, fps);
+    LOGCATE("SingleVideoRecorder::SingleVideoRecorder outUrl=%s, [w,h]=[%d,%d], bitRate=%ld, fps=%d",
+            outUrl, frameWidth, frameHeight, bitRate, fps);
     strcpy(m_outUrl, outUrl);
     m_frameWidth = frameWidth;
     m_frameHeight = frameHeight;
@@ -45,8 +46,9 @@ int SingleVideoRecorder::StartRecord() {
             LOGCATE("SingleVideoRecorder::StartRecord avformat_new_stream fail. ret=%d", result);
             break;
         }
-
-        m_pCodec = avcodec_find_encoder(AV_CODEC_ID_MPEG4);
+//        LOGCATG("codec.name=%d", m_pCodecCtx->codec==NULL);
+//        m_pCodec = avcodec_find_decoder_by_name(format->name);
+        m_pCodec = avcodec_find_encoder(AV_CODEC_ID_VP9);
         if (m_pCodec == nullptr) {
             result = -1;
             LOGCATE("SingleVideoRecorder::StartRecord avcodec_find_encoder fail. ret=%d", result);
@@ -91,7 +93,7 @@ int SingleVideoRecorder::StartRecord() {
                              m_pCodecCtx->width, m_pCodecCtx->height, 1);
 
         AVDictionary *opt = 0;
-        if (m_pCodecCtx->codec_id == AV_CODEC_ID_H264) {
+        if (m_pCodecCtx->codec_id == AV_CODEC_ID_VP9) {
             av_dict_set_int(&opt, "video_track_timescale", 25, 0);
             av_dict_set(&opt, "preset", "slow", 0);
             av_dict_set(&opt, "tune", "zerolatency", 0);
